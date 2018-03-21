@@ -21,6 +21,7 @@ class PredefinedFeeds {
             for feed in feeds {
                 _ = Feed(title: feed.title, url: feed.url, dateAdded: NSDate())
             }
+            CoreDataService.shared.saveContext()
             UserDefaults.standard.set(true, forKey: isPredefinedFeedsAlreadyAdded)
         }
     }
