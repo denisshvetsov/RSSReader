@@ -13,9 +13,7 @@ class CoreDataService {
     
     static let shared = CoreDataService()
     
-    private init() {
-        self.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-    }
+    private init() {}
     
     func entityDescription(forName name: String) -> NSEntityDescription? {
         return NSEntityDescription.entity(forEntityName: name,

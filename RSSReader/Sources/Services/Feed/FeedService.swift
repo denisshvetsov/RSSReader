@@ -53,13 +53,16 @@ class FeedService {
             completion(.wrongURL)
             return
         }
-        self.networkService.getRSSFeed(with: url) { rssFeed, error in
-            DispatchQueue.main.async { [unowned self] in
-                if let rssFeed = rssFeed {
-                    self.coreDataService.deleteFeedItems(from: feed)
-                    self.coreDataService.saveFeedItems(from: rssFeed, with: feed)
-                    completion(nil)
-                } else {
+        
+        self.networkService.getRSSFeed(with: url) { [unowned self] rssFeed, error in
+            if let rssFeed = rssFeed {
+                self.coreDataService.update(feed, with: rssFeed) {
+                    DispatchQueue.main.async {
+                        completion(nil)
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
                     completion(error)
                 }
             }

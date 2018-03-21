@@ -29,4 +29,11 @@ public class FeedItem: NSManagedObject {
         self.feed = feed
     }
     
+    func populate(from rssItem: RSSItem) {
+        self.title = rssItem.title
+        self.desc = rssItem.desc
+        self.url = rssItem.link
+        self.date = rssItem.date.rssDate
+    }
+    
 }
